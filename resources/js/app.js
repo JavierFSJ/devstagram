@@ -35,3 +35,7 @@ dropzone.on("success", function (file, xhr, formData) {
     const { imagen } = xhr;
     document.querySelector("#imagen").value = imagen;
 });
+
+dropzone.on('removedfile' , function(){
+    document.querySelector("#imagen").value = "";
+});

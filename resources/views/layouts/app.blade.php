@@ -12,7 +12,7 @@
     {{-- Js --}}
     @vite('resources/js/app.js')
     
-    <title>@yield('titulo')</title>
+    <title>Devstagram @yield('titulo')</title>
 </head>
 
 <body class="bg-gray-50">
