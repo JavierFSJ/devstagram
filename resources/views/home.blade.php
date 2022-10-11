@@ -1,20 +1,35 @@
 @extends('layouts.app')
 
-
 @section('titulo')
     Perfil: {{ $user->username }}
 @endsection
-
 
 @section('contenido')
     <div class="flex justify-center mt-10">
         <div class="w-full md:w-8/12 lg:w-6/12 flex flex-col items-center md:flex-row">
             <div class="w-8/12 lg:w-6/12 px-5">
-                <img src="{{ asset('img/usuario.svg') }}" alt="Usuario">
+                <img src="{{ $user->imagen ? asset('perfil') . '/' . $user->imagen : asset('img/usuario.svg') }}"
+                    alt="Usuario">
             </div>
             <div class="md:w-8/12 lg:w-6/12 px-5 flex flex-col items-center md:justify-center py-10 md:items-start md:py-10">
-                <p class="text-gray-700 text-2xl mt-2">{{ $user->username }}</p>
-
+                <div class="flex gap-4">
+                    <p class="text-gray-700 text-2xl mt-2">{{ $user->username }}</p>
+                    @auth
+                        @if ($user->id === auth()->user()->id)
+                            <a href="{{ route('perfil.index', $user) }}"
+                                class="text-gray-500 hover:text-gray-600 cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="44"
+                                    height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+                                    <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+                                    <line x1="16" y1="5" x2="19" y2="8" />
+                                </svg>
+                            </a>
+                        @endif
+                    @endauth
+                </div>
 
                 <p class="text-gray-800 text-sm mb-3 font-bold mt-5">
                     0
@@ -25,7 +40,7 @@
                     <span class="font-normal">Siguiendo</span>
                 </p>
                 <p class="text-gray-800 text-sm mb-3 font-bold">
-                    0
+                    {{ $user->posts->count()  }}
                     <span class="font-normal">Post</span>
                 </p>
             </div>
@@ -38,14 +53,14 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 @foreach ($posts as $post)
                     <div class="">
-                        <a href="{{ route('post.show' , ['post' => $post, 'user' => $user])}}">
+                        <a href="{{ route('post.show', ['post' => $post, 'user' => $user]) }}">
                             <img src="{{ asset('uploads/' . $post->imagen) }}" alt="Imagen Post">
                         </a>
                     </div>
                 @endforeach
             </div>
             <div class="my-10">
-              {{$posts->links('pagination::tailwind')}}
+                {{ $posts->links('pagination::tailwind') }}
             </div>
         @else
             <p class="text-gray-600 uppercase	text-sn text-center font-bold">No hay post diponibles</p>

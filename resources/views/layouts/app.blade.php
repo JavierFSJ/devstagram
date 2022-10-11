@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+
     {{-- Css --}}
     @vite('resources/css/app.css')
     @stack('styles')
     {{-- Js --}}
     @vite('resources/js/app.js')
-    
+
     <title>Devstagram @yield('titulo')</title>
 </head>
 
@@ -26,7 +26,7 @@
 
             <nav class="flex gap-4 items-center">
                 @auth
-                    <a  href="{{ route('post.create')}}"
+                    <a href="{{ route('post.create') }}"
                         class="flex items-center gap-2 bg-white border p-2 text-gray-400 rounded text-sm uppercase font-bold cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
@@ -68,7 +68,7 @@
 
 
     <footer class="text-center p-5 text-gray-500 font-bold uppercase mt-10">
-        DevStagram - Todos los derechos reservados {{ now() }}
+        DevStagram - Todos los derechos reservados {{ now()->year; }}
     </footer>
 
 </body>

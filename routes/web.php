@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,16 +25,28 @@ Route::get('/', function () {
     return view('principal');
 })->name('principal');
 
-Route::get('/register', [RegisterController::class , 'index'])->name('register.index');
-Route::post('/register' , [RegisterController::class , 'store'])->name('register.store');
+Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
-Route::get('/login' , [LoginController::class , 'index'])->name('login');
-Route::post('/login' , [LoginController::class , 'store']);
-Route::post('/logout' , [LogoutController::class , 'store'])->name('logout');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'store']);
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
-Route::get('/{user:username}' , [PostController::class , 'index'])->name('post.index');
-Route::get('/posts/create' , [PostController::class , 'create'])->name('post.create');
-Route::post('/posts' , [PostController::class , 'store'])->name('post.store');
-Route::get('/{user:username}/posts/{post}' , [PostController::class , 'show'])->name('post.show');
+Route::get('/{user:username}', [PostController::class, 'index'])->name('post.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
+Route::post('/posts', [PostController::class, 'store'])->name('post.store');
+Route::get('/{user:username}/posts/{post}', [PostController::class, 'show'])->name('post.show');
+Route::post('/{user:username}/posts/{post}', [ComentarioController::class, 'store'])->name('comentarios.store');
+Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
-Route::post('/imagenes' , [ImagenController::class , 'store'])->name('imagen.store');
+
+//Like a las fotos
+Route::post('/post/{post}/likes', [LikeController::class, 'store'])->name('post.likes.store');
+Route::delete('/post/{post}/likes', [LikeController::class, 'destroy'])->name('post.likes.destroy');
+
+Route::patch('{user:username}/editar-perfil' , [PerfilController::class , 'update'])->name('perfil.update');
+Route::get('{user:username}/editar-perfil' , [PerfilController::class , 'index'])->name('perfil.index');
+
+
+
+Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagen.store');

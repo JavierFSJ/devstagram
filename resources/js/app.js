@@ -30,6 +30,8 @@ const dropzone = new Dropzone("#dropzone", {
     },
 });
 
+
+
 /* Archivo , request , datos del form */
 dropzone.on("success", function (file, xhr, formData) {
     const { imagen } = xhr;
