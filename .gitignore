@@ -2,6 +2,8 @@
 /public/build
 /public/hot
 /public/storage
+/public/uploads
+/public/perfil
 /storage/*.key
 /vendor
 .env
