@@ -25,7 +25,7 @@ use App\Http\Controllers\HomeController;
 
 
 /* Routing tipo closure */
-Route::get('/', HomeController::class)->name('principal');
+Route::get('/', HomeController::class)->name('home');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');

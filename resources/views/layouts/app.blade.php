@@ -13,6 +13,8 @@
     @vite('resources/js/app.js')
 
     <title>Devstagram @yield('titulo')</title>
+
+    @livewireStyles()
 </head>
 
 <body class="bg-gray-50">
@@ -21,7 +23,7 @@
 
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-3xl font-black">
-                Devstagram
+                <a href="{{ route('home')}}">Devstagram</a>
             </h1>
 
             <nav class="flex gap-4 items-center">
@@ -70,7 +72,7 @@
     <footer class="text-center p-5 text-gray-500 font-bold uppercase mt-10">
         DevStagram - Todos los derechos reservados {{ now()->year; }}
     </footer>
-
+    @livewireScripts
 </body>
 
 </html>
