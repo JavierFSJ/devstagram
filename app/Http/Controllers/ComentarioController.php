@@ -12,7 +12,7 @@ class ComentarioController extends Controller
     public function store(Request $request , User $user , Post $post)
     {
         $this->validate($request , [
-            'comentario' => 'required|max:255',
+            'comentario' => 'required|max:10|min:5',
         ]);
         //almacenar
         Comentario::create([
